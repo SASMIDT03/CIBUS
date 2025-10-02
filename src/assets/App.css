@@ -1,0 +1,78 @@
+div {
+    font-family: "Courier New", Courier, monospace;
+}
+
+.mainHeader {
+    display: flex;
+    justify-content: center;
+    font-size: 200%;
+}
+
+.week {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: row;
+}
+
+.day {
+    background: wheat;
+    border-radius: 5%;
+    padding: 10px;
+    margin: 1%;
+    width: 20%;
+    height: 40%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.day h1{
+    width: 100%;
+    padding: 3%;
+    margin: 0;
+    color: red;
+}
+
+.day h4 {
+    margin: 0;
+    padding: 1%;
+    width: 100%;
+}
+
+.day header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 5%;
+    background: #EDB92F;
+    box-shadow: 4px 4px #101010;
+
+    will-change: transform;
+}
+
+button:hover {
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.05);
+}
+
+button:active {
+    transition: transform 0.05s ease-in-out;
+    transform: scale(0.95);
+
+    box-shadow: 6px 6px #101010;
+}
+
+.navWeekBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1%;
+}
