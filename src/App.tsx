@@ -1,6 +1,6 @@
 import "./assets/App.css"
 import { useState } from "react";
-import Day from './Day.tsx';
+import { Day } from './Day.tsx';
 import { DayName } from './DayName.ts';
 
 export default function App() {
