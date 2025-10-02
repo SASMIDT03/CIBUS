@@ -3,4 +3,5 @@ export interface MealPlan {
     date: string;       // 'YYYY-MM-DD'
     meal_id?: string | null;
     notes?: string | null;
+    meals?: { name: string };
 }

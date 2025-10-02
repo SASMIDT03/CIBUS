@@ -13,7 +13,9 @@ export async function setPlanForDate(dateIso: string, mealId: string | null, not
     const { data, error } = await supabase
         .from("meal_plans")
         .upsert({ date: dateIso, meal_id: mealId, notes }, { onConflict: "date" })
-        .select()
+        .select(`
+            *, meals(name)
+        `)
         .single();
     if (error) throw error;
     return data as MealPlan;
