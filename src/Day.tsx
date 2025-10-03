@@ -1,5 +1,5 @@
 import SplitText from './assets/SplitText.tsx';
-import {getPlanByDate, setPlanForDate} from './api/mealPlans.ts';
+import {getPlanByDate, removePlanByDate, setPlanForDate} from './api/mealPlans.ts';
 import { useEffect, useState } from 'react';
 import { MealPlan } from './interfaces/MealPlan.ts';
 import "./assets/Day.css"
@@ -37,6 +37,11 @@ export function Day({ dayOfWeek, date }: DayProps) {
         catch (error: any) {
             console.error("Error while getting meal: ", error.message);
         }
+    }
+
+    async function deleteMeal() {
+        await removePlanByDate(date);
+        setPlannedMeal(undefined);
     }
 
     useEffect(() => {
@@ -94,7 +99,7 @@ export function Day({ dayOfWeek, date }: DayProps) {
                             <p><strong>Noter:</strong> {plannedMeal.notes}</p>
                         )}
                         <div className="mealFooter">
-                            <img className="trashIcon" src={TrashIcon} />
+                            <img onClick={deleteMeal} className="trashIcon" src={TrashIcon} />
                         </div>
                     </div>
                 ) : (
