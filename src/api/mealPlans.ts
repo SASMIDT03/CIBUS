@@ -3,7 +3,11 @@ import { supabase } from "../lib/supabase";
 import type { MealPlan } from "../interfaces/MealPlan.ts";
 
 export async function getPlanByDate(dateIso: string): Promise<MealPlan | null> {
-    const { data, error } = await supabase.from("meal_plans").select("*").eq("date", dateIso).maybeSingle();
+    const { data, error } = await supabase
+        .from("meal_plans")
+        .select("*, meals(name)")
+        .eq("date", dateIso)
+        .maybeSingle();
     if (error) throw error;
     return (data as MealPlan) ?? null;
 }

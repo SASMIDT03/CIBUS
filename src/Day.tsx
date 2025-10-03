@@ -1,5 +1,5 @@
 import SplitText from './assets/SplitText.tsx';
-import { setPlanForDate} from './api/mealPlans.ts';
+import {getPlanByDate, setPlanForDate} from './api/mealPlans.ts';
 import { useEffect, useState } from 'react';
 import { MealPlan } from './interfaces/MealPlan.ts';
 import "./assets/Day.css"
@@ -26,7 +26,22 @@ export function Day({ dayOfWeek, date }: DayProps) {
         }
     }
 
+    async function getMeal() {
+        try {
+            const plannedMeal: MealPlan | null = await getPlanByDate(date);
+            if (!plannedMeal) { return; }
+            setPlannedMeal(plannedMeal!);
+            console.log("Got meal from: ", date, " : ", plannedMeal);
+        }
+        catch (error: any) {
+            console.error("Error while getting meal: ", error.message);
+        }
+    }
+
     useEffect(() => {
+        if (!plannedMeal) {
+            getMeal().then();
+        }
         if (plannedMeal) {
             console.log("Updated planed meal: ", plannedMeal);
         }
