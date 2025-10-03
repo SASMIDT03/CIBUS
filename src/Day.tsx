@@ -1,27 +1,51 @@
 import SplitText from './assets/SplitText.tsx';
-import { setPlanForDate} from './api/mealPlans.ts';
+import {getPlanByDate, setPlanForDate} from './api/mealPlans.ts';
+import { useEffect, useState } from 'react';
+import { MealPlan } from './interfaces/MealPlan.ts';
+import "./assets/Day.css"
 
 interface DayProps {
     dayOfWeek: string;
     date: string;
 }
 
+export function Day({ dayOfWeek, date }: DayProps) {
 
+    const [plannedMeal, setPlannedMeal] = useState<MealPlan>();
 
-export default function Day({ dayOfWeek, date}: DayProps) {
     async function addMeal() {
         try {
             const mealId = "521c8d97-c3c6-48e7-9020-a27d10b5379e"
 
-            const plan = await setPlanForDate(date, mealId, "Skal være klar klokken 17:00");
+            const plan: MealPlan = await setPlanForDate(date, mealId, "Skal være klar klokken 17:00");
 
-            console.log("Added meal to: ", plan);
-        }
-        catch (error: any) {
+            console.log("Added meal to: ", typeof plan);
+            setPlannedMeal(plan)
+        } catch (error: any) {
             console.error("Error while adding meal: ", error.message);
         }
-
     }
+
+    async function getMeal() {
+        try {
+            const plannedMeal: MealPlan | null = await getPlanByDate(date);
+            if (!plannedMeal) { return; }
+            setPlannedMeal(plannedMeal!);
+            console.log("Got meal from: ", date, " : ", plannedMeal);
+        }
+        catch (error: any) {
+            console.error("Error while getting meal: ", error.message);
+        }
+    }
+
+    useEffect(() => {
+        if (!plannedMeal) {
+            getMeal().then();
+        }
+        if (plannedMeal) {
+            console.log("Updated planed meal: ", plannedMeal);
+        }
+    }, [plannedMeal]);
 
     // Return
     return (
@@ -43,7 +67,7 @@ export default function Day({ dayOfWeek, date}: DayProps) {
                     //onLetterAnimationComplete={handleAnimationComplete}
                 />
                 <SplitText
-                    key ={date}
+                    key={date}
                     text={date}
                     className="text-2xl font-semibold text-center"
                     delay={100}
@@ -59,7 +83,19 @@ export default function Day({ dayOfWeek, date}: DayProps) {
                     //onLetterAnimationComplete={handleAnimationComplete}
                 />
             </div>
-            <p>This is some day text, bla, bla, bla, etc. etc.</p>
+
+            <div className="meal">
+                {plannedMeal ? (
+                    <div className="dinner">
+                        <p>{plannedMeal.meals?.name}</p>
+                        {plannedMeal.notes && (
+                            <p><strong>Notes:</strong> {plannedMeal.notes}</p>
+                        )}
+                    </div>
+                ) : (
+                    <p>No meal planned yet.</p>
+                )}
+            </div>
             <button onClick={addMeal}>Add Meal</button>
         </div>
     )
