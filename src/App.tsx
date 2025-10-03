@@ -62,8 +62,8 @@ export default function App() {
                 <button onClick={nextWeek}>Next Week</button>
             </div>
             <div className="week">
-                {weekDays.map((day, index) => (
-                    <Day key={index} dayOfWeek={day.name} date={day.date.toDateString()} />
+                {weekDays.map((day) => (
+                    <Day key={day.date.toDateString()} dayOfWeek={day.name} date={day.date.toDateString()} />
                 ))}
             </div>
         </div>
