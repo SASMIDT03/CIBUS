@@ -8,6 +8,44 @@
     padding: 5px;
     margin-bottom: 12px;
 
-    border: 1px solid #EDB92F;
+}
+
+.trashIcon {
+    padding: 2px;
+    width: 28px;
+    /*filter: invert(14%) sepia(93%) saturate(5437%) hue-rotate(359deg) brightness(101%) contrast(124%);*/
+}
+
+.trashIcon:hover {
+    cursor: pointer;
+    /*filter: invert(14%) sepia(93%) saturate(5437%) hue-rotate(359deg) brightness(65%) contrast(124%); /* Slightly darker red */
+    border-radius: 5px;
+
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.05);
+}
+
+.trashIcon:active {
+    transition: transform 0.05s ease-in-out;
+    transform: scale(0.95);
+}
+
+.mealFooter {
+    display: flex;
+    justify-content: right;
+}
+
+.hline {
+    width: 100%;
+    height: 1px;
+    background: #101010;
+}
+
+.plusIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5px;
+    font-size: xx-large;
 }
 

@@ -1,9 +1,9 @@
 export enum DayName {
-    Monday = "Monday",
-    Tuesday = "Tuesday",
-    Wednesday = "Wednesday",
-    Thursday = "Thursday",
-    Friday = "Friday",
-    Saturday = "Saturday",
-    Sunday = "Sunday",
+    Monday = "Mandag",
+    Tuesday = "Tirsdag",
+    Wednesday = "Onsdag",
+    Thursday = "Torsdag",
+    Friday = "Fredag",
+    Saturday = "Lørdag",
+    Sunday = "Søndag",
 }

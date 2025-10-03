@@ -1,3 +1,19 @@
 body {
-    background: antiquewhite;
+    background: #fdf0d5;
+}
+
+@font-face {
+    /* 1. Name the font. This is what you'll use in 'font-family'. */
+    font-family: 'MyCustomTTF';
+
+    /* 2. Define its weight and style. */
+    font-weight: normal;
+    font-style: normal;
+
+    /* 3. Specify the file path and format. */
+    /* The path must be relative to the CSS file where this rule is defined. */
+    src: url("Montserrat-VariableFont_wght.ttf") format('truetype');
+
+    /* 4. Optional: recommended for performance. */
+    font-display: swap;
 }

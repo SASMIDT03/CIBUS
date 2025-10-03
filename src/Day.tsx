@@ -3,6 +3,7 @@ import {getPlanByDate, setPlanForDate} from './api/mealPlans.ts';
 import { useEffect, useState } from 'react';
 import { MealPlan } from './interfaces/MealPlan.ts';
 import "./assets/Day.css"
+import TrashIcon from './assets/trash_icon.svg';
 
 interface DayProps {
     dayOfWeek: string;
@@ -52,7 +53,7 @@ export function Day({ dayOfWeek, date }: DayProps) {
         <div className="day">
             <div className="header">
                 <SplitText
-                    text={dayOfWeek}
+                    text={dayOfWeek.toUpperCase()}
                     className="text-2xl font-semibold text-center"
                     delay={100}
                     duration={0.6}
@@ -85,18 +86,22 @@ export function Day({ dayOfWeek, date }: DayProps) {
             </div>
 
             <div className="meal">
+                <div className="hline"></div>
                 {plannedMeal ? (
                     <div className="dinner">
-                        <p>{plannedMeal.meals?.name}</p>
+                        <p><strong>{plannedMeal.meals?.name}</strong></p>
                         {plannedMeal.notes && (
-                            <p><strong>Notes:</strong> {plannedMeal.notes}</p>
+                            <p><strong>Noter:</strong> {plannedMeal.notes}</p>
                         )}
+                        <div className="mealFooter">
+                            <img className="trashIcon" src={TrashIcon} />
+                        </div>
                     </div>
                 ) : (
-                    <p>No meal planned yet.</p>
+                    <p></p>
                 )}
             </div>
-            <button onClick={addMeal}>Add Meal</button>
+            <button onClick={addMeal}><div className="plusIcon">+</div> </button>
         </div>
     )
 }

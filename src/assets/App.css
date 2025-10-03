@@ -1,5 +1,5 @@
 div {
-    font-family: "Courier New", Courier, monospace;
+    font-family: MyCustomTTF;
 }
 
 .mainHeader {
@@ -31,7 +31,7 @@ div {
     width: 100%;
     padding: 3%;
     margin: 0;
-    color: red;
+    color: #C10010;
 }
 
 .day h4 {
@@ -48,13 +48,22 @@ div {
     align-items: center;
 }
 
+.day button {
+    width: 32px;
+    height: 32px;
+    border-radius: 24%;
+}
+
 button {
     padding: 10px;
     border: none;
     border-radius: 5%;
-    background: #EDB92F;
+    background: #C10010;
     box-shadow: 4px 4px #101010;
+    font-family: MyCustomTTF;
+    cursor: pointer;
 
+    color: #fdf0d5;
     will-change: transform;
 }
 

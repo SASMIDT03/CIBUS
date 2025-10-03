@@ -57,13 +57,13 @@ export default function App() {
                 <h1>CIBUS</h1>
             </div>
             <div className="navWeekBar">
-                <button onClick={prevWeek}>Previous Week</button>
-                <button onClick={thisWeek}>This Week</button>
-                <button onClick={nextWeek}>Next Week</button>
+                <button onClick={prevWeek}>SIDSTE UGE</button>
+                <button onClick={thisWeek}>DENNE UGE</button>
+                <button onClick={nextWeek}>NÆSTE UGE</button>
             </div>
             <div className="week">
                 {weekDays.map((day) => (
-                    <Day key={day.date.toDateString()} dayOfWeek={day.name} date={day.date.toDateString()} />
+                    <Day key={day.date.toLocaleDateString()} dayOfWeek={day.name} date={day.date.toLocaleDateString()} />
                 ))}
             </div>
         </div>
