@@ -2,6 +2,7 @@ import "./assets/App.css"
 import { useState } from "react";
 import { Day } from './Day.tsx';
 import { DayName } from './DayName.ts';
+import { getWeekNumber} from './util/dateUtil.ts';
 
 export default function App() {
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -29,6 +30,7 @@ export default function App() {
     }
 
     function thisWeek() {
+        console.log("Maybe this week?: ", getWeekNumber(new Date()));
         setCurrentDate(new Date()); // resets to today
     }
 
