@@ -18,12 +18,12 @@ button {
     padding: 10px;
     border: none;
     border-radius: 12px;
-    background: #C10010;
-    box-shadow: 4px 4px #101010;
+    background: var(--color-red);
+    box-shadow: 4px 4px var(--color-black);
     font-family: MyCustomTTF;
     cursor: pointer;
 
-    color: #fdf0d5;
+    color: var(--color-primary);
     will-change: transform;
 }
 
@@ -36,7 +36,7 @@ button:active {
     transition: transform 0.05s ease-in-out;
     transform: scale(0.95);
 
-    box-shadow: 6px 6px #101010;
+    box-shadow: 6px 6px var(--color-black);
 }
 
 .navWeekBar {

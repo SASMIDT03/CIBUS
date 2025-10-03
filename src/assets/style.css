@@ -1,5 +1,5 @@
 body {
-    background: #fdf0d5;
+    background: var(--color-primary);
 }
 
 @font-face {
