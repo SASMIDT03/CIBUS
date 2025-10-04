@@ -1,5 +1,5 @@
 import SplitText from './assets/SplitText.tsx';
-import {getPlanByDate, removePlanByDate, setPlanForDate} from './api/mealPlans.ts';
+import {getPlanByDate, removePlanByDate} from './api/mealPlans.ts';
 import { useEffect, useState } from 'react';
 import { MealPlan } from './interfaces/MealPlan.ts';
 import "./assets/Day.css"
@@ -8,12 +8,14 @@ import TrashIcon from './assets/trash_icon.svg';
 interface DayProps {
     dayOfWeek: string;
     date: string;
+    onAddMeal: (date: string) => void;
 }
 
-export function Day({ dayOfWeek, date }: DayProps) {
+export function Day({ dayOfWeek, date, onAddMeal }: DayProps) {
 
     const [plannedMeal, setPlannedMeal] = useState<MealPlan>();
 
+    /*
     async function addMeal() {
         try {
             const mealId = "521c8d97-c3c6-48e7-9020-a27d10b5379e"
@@ -26,6 +28,7 @@ export function Day({ dayOfWeek, date }: DayProps) {
             console.error("Error while adding meal: ", error.message);
         }
     }
+     */
 
     async function getMeal() {
         try {
@@ -106,7 +109,7 @@ export function Day({ dayOfWeek, date }: DayProps) {
                     <p></p>
                 )}
             </div>
-            <button onClick={addMeal}><div className="plusIcon">+</div> </button>
+            <button onClick={() => onAddMeal(date)}><div className="plusIcon">+</div> </button>
         </div>
     )
 }

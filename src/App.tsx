@@ -3,9 +3,12 @@ import { useState } from "react";
 import { Day } from './Day.tsx';
 import { DayName } from './DayName.ts';
 import { getWeekNumber} from './util/dateUtil.ts';
+import { MealSelector} from './MealSelector.tsx';
 
 export default function App() {
     const [currentDate, setCurrentDate] = useState(new Date());
+    const [mealSelectorOpen, setMealSelectorOpen] = useState(false);
+    const [selectDate, setSelectedDate] = useState<string>();
 
     function getMonday(d: Date): Date {
         const diffToLatestMonday = (d.getDay() + 6) % 7;
@@ -29,9 +32,16 @@ export default function App() {
         });
     }
 
+    // TODO
     function thisWeek() {
         console.log("Maybe this week?: ", getWeekNumber(new Date()));
         setCurrentDate(new Date()); // resets to today
+    }
+
+    function openMealSelector(date: string) {
+        console.log("Opening meal selector with date: ", date);
+        setSelectedDate(date);
+        setMealSelectorOpen(true);
     }
 
 
@@ -56,7 +66,7 @@ export default function App() {
     return (
         <div>
             <div className="mainHeader">
-                <h1>CIBUS</h1>
+                <h1>SKRÅNINGEN</h1>
             </div>
             <div className="navWeekBar">
                 <button onClick={prevWeek}>SIDSTE UGE</button>
@@ -65,9 +75,16 @@ export default function App() {
             </div>
             <div className="week">
                 {weekDays.map((day) => (
-                    <Day key={day.date.toLocaleDateString()} dayOfWeek={day.name} date={day.date.toLocaleDateString()} />
+                    <Day key={day.date.toLocaleDateString()} dayOfWeek={day.name} date={day.date.toLocaleDateString()} onAddMeal={openMealSelector} />
                 ))}
             </div>
+
+            <MealSelector
+                isOpen={mealSelectorOpen}
+                onClose={() => setMealSelectorOpen(false)}
+                onSelect={() => console.log("onSelect")}
+                date={selectDate ?? ""}
+            />
         </div>
     );
 }
