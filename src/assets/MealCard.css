@@ -1,0 +1,10 @@
+.mealCard {
+    background-color: var(--color-secondary);
+    max-width: 200px;
+    border-radius: 12px;
+}
+
+.mealCard:hover {
+    cursor: pointer;
+    box-shadow: 4px 4px var(--color-black);
+}
