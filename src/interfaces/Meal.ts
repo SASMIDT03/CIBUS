@@ -1,6 +1,7 @@
 export interface Meal {
     id: string;
     name: string;
-    description?: string | null;
+    ingredients?: string[] | null;
+    recipe?: string | null;
     tags?: string[] | null;
 }

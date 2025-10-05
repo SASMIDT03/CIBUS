@@ -7,9 +7,11 @@ import { MealComponent } from './MealCard.tsx';
 type MealPopupProps = {
     isOpen: boolean;
     onClose: () => void;
-    onSelect: (meal: string) => void;
+    onSelect: (meal: Meal, date: string) => void;
     date: string;
 };
+
+
 
 export function MealSelector({ isOpen, onClose, onSelect, date }: MealPopupProps) {
 
@@ -29,11 +31,14 @@ export function MealSelector({ isOpen, onClose, onSelect, date }: MealPopupProps
 
     useEffect(() => {
         if (!isOpen) return;
-        console.log("Getting meals");
         getMeals().then();
     }, [isOpen]);
 
     if (!isOpen) return null;
+
+    function tellAppToAddMeal(meal: Meal) {
+        onSelect(meal, date)
+    }
 
 
     return (
@@ -48,7 +53,7 @@ export function MealSelector({ isOpen, onClose, onSelect, date }: MealPopupProps
                     </div>
                     <div className={"main"}>
                         {retrievedMeals.map((meal) => (
-                            <MealComponent key={meal.id} meal={meal} />
+                            <MealComponent key={meal.id} meal={meal} onSelect={tellAppToAddMeal} />
                         ))}
                     </div>
                 </div>
