@@ -46,9 +46,9 @@ export default function App() {
     }
 
     // Add a meal for a specific date
-    async function addMealAtDate(meal: Meal, date: string) {
+    async function addMealAtDate(meal: Meal, date: string, notes?: string) {
         try {
-            const plannedMeal: MealPlan = await setPlanForDate(date, meal.id, "Lidt noter herfra");
+            const plannedMeal: MealPlan = await setPlanForDate(date, meal.id, notes);
             setPlansByDate(prev => ({
                 ...prev,
                 [date]: plannedMeal,
@@ -135,9 +135,10 @@ export default function App() {
             <MealSelector
                 isOpen={mealSelectorOpen}
                 onClose={() => setMealSelectorOpen(false)}
-                onSelect={(meal: Meal) => addMealAtDate(meal, selectedDate!)}
+                onAddMeal={(meal: Meal, date: string, notes: string) => addMealAtDate(meal, date, notes)}
                 date={selectedDate ?? ""}
             />
+
         </div>
     );
 }

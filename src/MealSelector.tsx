@@ -3,19 +3,20 @@ import { fetchMeals } from './api/meals.ts';
 import { Meal } from './interfaces/Meal.ts';
 import { useEffect, useState } from 'react';
 import { MealComponent } from './MealCard.tsx';
+import {MealNotesDialogBox} from "./MealNotesDialogBox.tsx";
 
 type MealPopupProps = {
     isOpen: boolean;
     onClose: () => void;
-    onSelect: (meal: Meal, date: string) => void;
+    onAddMeal: (meal: Meal, date: string, notes: string) => void;
     date: string;
 };
 
-
-
-export function MealSelector({ isOpen, onClose, onSelect, date }: MealPopupProps) {
+export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProps) {
 
     const [retrievedMeals, setRetrievedMeals ] = useState<Meal[]>([]);
+    const [openMealNotesDialogBox, setOpenMealNotesDialogBox] = useState(false);
+    const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
 
     async function getMeals() {
         try {
@@ -36,8 +37,13 @@ export function MealSelector({ isOpen, onClose, onSelect, date }: MealPopupProps
 
     if (!isOpen) return null;
 
-    function tellAppToAddMeal(meal: Meal) {
-        onSelect(meal, date)
+    function tellAppToAddMeal(notes: string) {
+        onAddMeal(selectedMeal!, date, notes);
+    }
+
+    function handleOpenMealNotesDialogForMeal(meal: Meal) {
+        setSelectedMeal(meal);
+        setOpenMealNotesDialogBox(true);
     }
 
 
@@ -53,7 +59,7 @@ export function MealSelector({ isOpen, onClose, onSelect, date }: MealPopupProps
                     </div>
                     <div className={"main"}>
                         {retrievedMeals.map((meal) => (
-                            <MealComponent key={meal.id} meal={meal} onSelect={tellAppToAddMeal} />
+                            <MealComponent key={meal.id} meal={meal} onSelect={() => handleOpenMealNotesDialogForMeal(meal)} />
                         ))}
                     </div>
                 </div>
@@ -62,6 +68,11 @@ export function MealSelector({ isOpen, onClose, onSelect, date }: MealPopupProps
                     <button onClick={onClose}>Close</button>
                 </div>
 
+                <MealNotesDialogBox
+                    isOpen={openMealNotesDialogBox}
+                    onClose={() => setOpenMealNotesDialogBox(false)}
+                    onAddMeal={tellAppToAddMeal}
+                />
             </div>
         </div>
     );

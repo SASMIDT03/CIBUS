@@ -1,0 +1,10 @@
+.mealNotesDialog {
+    width: 500px;
+    border: 1px pink solid;
+    background-color: white;
+    z-index: 1000;
+}
+
+.mealNotesDialog input {
+    border: 3px solid black;
+}
