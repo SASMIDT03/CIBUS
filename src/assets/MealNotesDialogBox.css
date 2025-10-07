@@ -1,10 +1,18 @@
+.popup-notesDialog {
+    background: var(--color-primary);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 6px 6px var(--color-black);
+    max-width: 25vw;
+    height: 25vh;
+    width: 100%;
+    text-align: center;
+}
+
 .mealNotesDialog {
-    width: 500px;
-    border: 1px pink solid;
-    background-color: white;
-    z-index: 1000;
+    width: 100%;
 }
 
 .mealNotesDialog input {
-    border: 3px solid black;
+
 }
