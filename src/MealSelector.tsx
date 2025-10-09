@@ -1,5 +1,5 @@
 import "./assets/MealSelector.css"
-import { createMeal, fetchMeals } from './api/meals.ts';
+import { createMeal, deleteMeal, fetchMeals } from './api/meals.ts';
 import { Meal } from './interfaces/Meal.ts';
 import { useEffect, useState } from 'react';
 import { MealComponent } from './MealCard.tsx';
@@ -27,6 +27,7 @@ export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProp
 
             console.log("fetchedMeals", fetchedMeals)
             setRetrievedMeals(fetchedMeals);
+            retrievedMeals.sort();
         }
         catch (error: any) {
             console.error("Error while fetching meals: ", error);
@@ -49,9 +50,13 @@ export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProp
         setOpenMealNotesDialogBox(true);
     }
 
-    function saveMeal(meal: Meal) {
+    function saveMeal(meal: Partial<Meal>) {
         createMeal(meal).then(getMeals);
         setOpenMealEditor(false);
+    }
+
+    function deleteMealById(mealId: string) {
+        deleteMeal(mealId).then(getMeals);
     }
 
 
@@ -67,7 +72,12 @@ export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProp
                     </div>
                     <div className={"main"}>
                         {retrievedMeals.map((meal) => (
-                            <MealComponent key={meal.name} meal={meal} onSelect={() => handleOpenMealNotesDialogForMeal(meal)} />
+                            <MealComponent
+                                key={meal.id}
+                                meal={meal}
+                                onSelect={() => handleOpenMealNotesDialogForMeal(meal)}
+                                onDeleteMeal={deleteMealById}
+                            />
                         ))}
                     </div>
                 </div>

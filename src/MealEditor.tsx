@@ -4,7 +4,7 @@ import { Meal } from './interfaces/Meal.ts';
 type MealEditorProps = {
     isOpen: boolean;
     onClose: () => void;
-    onSaveMeal: (meal: Meal) => void
+    onSaveMeal: (meal: Partial<Meal>) => void
 }
 
 export function MealEditor({isOpen, onClose, onSaveMeal}: MealEditorProps) {
@@ -20,7 +20,7 @@ export function MealEditor({isOpen, onClose, onSaveMeal}: MealEditorProps) {
             return;
         }
 
-        const meal: Meal = {
+        const meal: Partial<Meal> = {
             name: mealName!,
             ingredients: ingredientsList,
             recipe: recipe1
