@@ -1,5 +1,5 @@
 import "./assets/MealSelector.css"
-import { fetchMeals } from './api/meals.ts';
+import { createMeal, fetchMeals } from './api/meals.ts';
 import { Meal } from './interfaces/Meal.ts';
 import { useEffect, useState } from 'react';
 import { MealComponent } from './MealCard.tsx';
@@ -49,6 +49,11 @@ export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProp
         setOpenMealNotesDialogBox(true);
     }
 
+    function saveMeal(meal: Meal) {
+        createMeal(meal).then(getMeals);
+        setOpenMealEditor(false);
+    }
+
 
     return (
         <div className="popup-overlay">
@@ -62,7 +67,7 @@ export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProp
                     </div>
                     <div className={"main"}>
                         {retrievedMeals.map((meal) => (
-                            <MealComponent key={meal.id} meal={meal} onSelect={() => handleOpenMealNotesDialogForMeal(meal)} />
+                            <MealComponent key={meal.name} meal={meal} onSelect={() => handleOpenMealNotesDialogForMeal(meal)} />
                         ))}
                     </div>
                 </div>
@@ -79,7 +84,7 @@ export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProp
                 <MealEditor
                     isOpen={openMealEditor}
                     onClose={() => setOpenMealEditor(false)}
-                    onSaveMeal={() => console.log("MealEditor onSaveMeal")}
+                    onSaveMeal={saveMeal}
                 />
             </div>
         </div>
