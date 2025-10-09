@@ -4,6 +4,7 @@ import { Meal } from './interfaces/Meal.ts';
 import { useEffect, useState } from 'react';
 import { MealComponent } from './MealCard.tsx';
 import {MealNotesDialogBox} from "./MealNotesDialogBox.tsx";
+import {MealEditor} from "./MealEditor.tsx";
 
 type MealPopupProps = {
     isOpen: boolean;
@@ -17,6 +18,8 @@ export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProp
     const [retrievedMeals, setRetrievedMeals ] = useState<Meal[]>([]);
     const [openMealNotesDialogBox, setOpenMealNotesDialogBox] = useState(false);
     const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
+
+    const [openMealEditor, setOpenMealEditor] = useState(false);
 
     async function getMeals() {
         try {
@@ -64,7 +67,7 @@ export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProp
                     </div>
                 </div>
                 <div className="footer">
-                    <button onClick={() => console.log("Ny ret")}>Ny ret</button>
+                    <button onClick={() => setOpenMealEditor(true)}>Ny ret</button>
                     <button onClick={onClose}>Close</button>
                 </div>
 
@@ -72,6 +75,11 @@ export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProp
                     isOpen={openMealNotesDialogBox}
                     onClose={() => setOpenMealNotesDialogBox(false)}
                     onAddMeal={tellAppToAddMeal}
+                />
+                <MealEditor
+                    isOpen={openMealEditor}
+                    onClose={() => setOpenMealEditor(false)}
+                    onSaveMeal={() => console.log("MealEditor onSaveMeal")}
                 />
             </div>
         </div>

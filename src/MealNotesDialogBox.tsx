@@ -23,11 +23,14 @@ export function MealNotesDialogBox({isOpen, onClose, onAddMeal}: MealSelectorPro
                         value={notes}
                         onChange={ (e) => setNotes(e.target.value) }
                     />
-                    <button onClick={() =>  {
-                        onClose();
-                        onAddMeal(notes);
-                    }}>Tilføj ret</button>
-                    <button onClick={() => onClose()}>Luk</button>
+                    <div className="footer">
+                        <button onClick={() =>  {
+                            onClose();
+                            onAddMeal(notes);
+                        }}>Tilføj ret</button>
+                        <button onClick={() => onClose()}>Luk</button>
+                    </div>
+
                 </div>
             </div>
         </div>
