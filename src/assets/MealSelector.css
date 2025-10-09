@@ -20,3 +20,24 @@
     width: 100%;
     text-align: center;
 }
+
+.main {
+    display: grid;
+    grid-template-columns: repeat(3, max-content);
+    grid-auto-flow: row;
+    grid-auto-columns: 10vh;
+    gap: 15px;
+    justify-content: space-evenly;
+    height: 72vh;
+    border: 5px solid var(--color-secondary);
+    border-radius: 15px;
+    overflow: auto;
+    padding: 30px;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+
+    height: 8vh;
+}
