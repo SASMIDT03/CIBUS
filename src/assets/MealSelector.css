@@ -23,16 +23,12 @@
 
 .main {
     display: grid;
-    grid-template-columns: repeat(3, max-content);
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 30vh));
     grid-auto-flow: row;
-    grid-auto-columns: 10vh;
-    gap: 15px;
-    justify-content: space-evenly;
-    height: 72vh;
-    border: 5px solid var(--color-secondary);
     border-radius: 15px;
     overflow: auto;
-    padding: 30px;
+    gap: 2vh;
 }
 
 .footer {

@@ -45,3 +45,56 @@ button:active {
     justify-content: center;
     gap: 1%;
 }
+
+input {
+    background-color: transparent;
+    border: none;
+    border-radius: 12px;
+
+    box-shadow: 0 4px 4px var(--color-black);
+    padding: 1vh;
+    margin: 1vh;
+}
+
+input:focus {
+    box-shadow: 0 4px 4px var(--color-red);
+    outline: none;
+}
+
+textarea {
+    background-color: transparent;
+    border: none;
+    border-radius: 12px;
+    height: 25vh;
+
+    box-shadow: 0 4px 4px var(--color-black);
+    padding: 1vh;
+    margin: 1vh;
+}
+
+textarea:focus {
+    box-shadow: 0 4px 4px var(--color-red);
+    outline: none;
+}
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: 0 4px 4px var(--color-secondary);
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-secondary);
+}

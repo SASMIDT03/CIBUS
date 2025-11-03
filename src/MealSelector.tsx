@@ -1,5 +1,5 @@
 import "./assets/MealSelector.css"
-import { createMeal, deleteMeal, fetchMeals } from './api/meals.ts';
+import { createMeal, deleteMeal, fetchMeals, fetchMealByName } from './api/meals.ts';
 import { Meal } from './interfaces/Meal.ts';
 import { useEffect, useState } from 'react';
 import { MealComponent } from './MealCard.tsx';
@@ -34,6 +34,17 @@ export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProp
         }
     }
 
+    async function getSearchedMeals(partialName: string) {
+        try {
+            const fetchedMeals: Meal[] = await fetchMealByName(partialName);
+
+            setRetrievedMeals(fetchedMeals);
+        }
+        catch (error: any) {
+            console.error("Error while fetching meals by partial name: ", error);
+        }
+    }
+
     useEffect(() => {
         if (!isOpen) return;
         getMeals().then();
@@ -59,6 +70,11 @@ export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProp
         deleteMeal(mealId).then(getMeals);
     }
 
+    function editMeal(meal: Meal) {
+        setSelectedMeal(meal)
+        setOpenMealEditor(true)
+    }
+
 
     return (
         <div className="popup-overlay">
@@ -68,7 +84,11 @@ export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProp
                 </div>
                 <div className="body">
                     <div className={"navigation"}>
-                        <input type={"text"} placeholder={"Søg.."}/>
+                        <input
+                            type={"text"}
+                            placeholder={"Søg.."}
+                            onChange={(e) => getSearchedMeals(e.target.value)}
+                        />
                     </div>
                     <div className={"main"}>
                         {retrievedMeals.map((meal) => (
@@ -77,12 +97,17 @@ export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProp
                                 meal={meal}
                                 onSelect={() => handleOpenMealNotesDialogForMeal(meal)}
                                 onDeleteMeal={deleteMealById}
+                                onEditMeal={editMeal}
                             />
                         ))}
                     </div>
                 </div>
                 <div className="footer">
-                    <button onClick={() => setOpenMealEditor(true)}>Ny ret</button>
+                    <button onClick={() => {
+                        setOpenMealEditor(true);
+                        setSelectedMeal(null)
+                    }
+                    }>Ny ret</button>
                     <button onClick={onClose}>Close</button>
                 </div>
 
@@ -95,6 +120,7 @@ export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProp
                     isOpen={openMealEditor}
                     onClose={() => setOpenMealEditor(false)}
                     onSaveMeal={saveMeal}
+                    currentMeal={selectedMeal}
                 />
             </div>
         </div>

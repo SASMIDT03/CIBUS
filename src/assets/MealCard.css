@@ -1,6 +1,7 @@
 .mealCard {
     background-color: var(--color-secondary);
-    max-width: 200px;
+    width: auto;
+    max-width: 300px;
     border-radius: 12px;
 
     display: flex;
@@ -14,10 +15,17 @@
 .mainSide {
     border-radius: 12px;
     width: 80%;
+    overflow: hidden;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .mainSide:hover {
     cursor: pointer;
+    max-height: 110%;
     box-shadow: 4px 4px var(--color-black);
 }
 
@@ -31,7 +39,7 @@
 
 .mealCard img:hover {
     cursor: pointer;
-    border-radius: 5px;
+
 
     transition: transform 0.2s ease-in-out;
     transform: scale(1.1);

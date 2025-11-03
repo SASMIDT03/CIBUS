@@ -8,9 +8,10 @@ type MealProps = {
     meal: Meal
     onSelect: (meal: Meal) => void;
     onDeleteMeal: (mealId: string) => void;
+    onEditMeal: (meal: Meal) => void;
 }
 
-export function MealComponent({ meal, onSelect, onDeleteMeal }: MealProps) {
+export function MealComponent({ meal, onSelect, onDeleteMeal, onEditMeal }: MealProps) {
 
     return (
         <div className={"mealCard"} >
@@ -18,7 +19,7 @@ export function MealComponent({ meal, onSelect, onDeleteMeal }: MealProps) {
                 <h3>{meal.name}</h3>
             </div>
             <div className={"secondarySide"}>
-                <img className={"editIcon"} src={EditIcon} onClick={() => console.log("Edit meal was pressed")} />
+                <img className={"editIcon"} src={EditIcon} onClick={() => onEditMeal(meal)} />
                 <img className={"trashIcon"} src={TrashIcon} onClick={() => onDeleteMeal(meal.id)} />
             </div>
         </div>
