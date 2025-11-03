@@ -17,9 +17,8 @@ export function MealNotesDialogBox({isOpen, onClose, onAddMeal}: MealSelectorPro
         <div className="popup-overlay" onClick={() => onClose()}>
             <div className="popup-notesDialog" onClick={(e) => e.stopPropagation()}>
                 <div className="mealNotesDialog">
-                    <input
-                        type={"text"}
-                        placeholder={"Tilføjer noter..."}
+                    <textarea
+                        placeholder={"Tilføj note..."}
                         value={notes}
                         onChange={ (e) => setNotes(e.target.value) }
                     />

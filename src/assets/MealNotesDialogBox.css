@@ -4,7 +4,7 @@
     border-radius: 12px;
     box-shadow: 6px 6px var(--color-black);
     max-width: 25vw;
-    height: 25vh;
+    height: auto;
     width: 100%;
     text-align: center;
 }
@@ -13,14 +13,6 @@
     width: 100%;
 }
 
-.mealNotesDialog input {
-    height: 15vh;
-    width: 100%;
-    margin-bottom: 3vh;
-    border: 2px solid var(--color-secondary);
-    background: none;
-    color: var(--color-black);
-}
 
 .footer {
     display: flex;
