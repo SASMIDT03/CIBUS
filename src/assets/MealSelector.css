@@ -29,6 +29,7 @@
     border-radius: 15px;
     overflow: auto;
     gap: 2vh;
+    height: 76vh;
 }
 
 .footer {
