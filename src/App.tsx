@@ -77,7 +77,7 @@ export default function App() {
             for (let i = 0; i < 7; i++) {
                 const date = new Date(monday);
                 date.setDate(monday.getDate() + i);
-                const key = date.toLocaleDateString();
+                const key = date.toISOString().split("T")[0];
                 const meal = await getPlanByDate(key);
                 if (meal) newPlans[key] = meal;
             }
