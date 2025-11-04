@@ -2,6 +2,7 @@ import SplitText from './assets/SplitText.tsx';
 import { MealPlan } from './interfaces/MealPlan.ts';
 import "./assets/Day.css";
 import TrashIcon from './assets/trash_icon.svg';
+import { formatDisplayDate } from './util/dateUtil.ts';
 
 interface DayProps {
     dayOfWeek: string;
@@ -23,7 +24,7 @@ export function Day({ dayOfWeek, date, plannedMeal, onOpenMealSelector, onDelete
                 />
                 <SplitText
                     key={date}
-                    text={date}
+                    text={formatDisplayDate(date)}
                     className="text-2xl font-semibold text-center"
                     tag="h4"
                 />

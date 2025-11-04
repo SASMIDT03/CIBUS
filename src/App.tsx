@@ -118,7 +118,7 @@ export default function App() {
 
             <div className="week">
                 {weekDays.map(day => {
-                    const key = day.date.toLocaleDateString();
+                    const key = day.date.toISOString().split("T")[0];
                     return (
                         <Day
                             key={key}

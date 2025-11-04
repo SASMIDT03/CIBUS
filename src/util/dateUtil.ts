@@ -18,3 +18,8 @@ export function getWeekNumber(d: Date): number {
     // The week number is the number of full weeks passed, rounded up.
     return Math.ceil((dayDiff + 1) / 7);
 }
+
+export function formatDisplayDate(date: string): string {
+    const [year, month, day] = date.split("-");
+    return `${day}/${month}/${year}`;
+}
