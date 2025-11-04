@@ -1,0 +1,15 @@
+.popup-notesDialog {
+    background: var(--color-primary);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 6px 6px var(--color-black);
+    max-width: 25vw;
+    height: auto;
+    width: 100%;
+    text-align: center;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-evenly;
+}

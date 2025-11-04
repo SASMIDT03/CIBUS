@@ -11,6 +11,16 @@ export async function fetchMeals(): Promise<Meal[]> {
     return data as Meal[];
 }
 
+export async function fetchMealByName(partialName: string): Promise<Meal[]> {
+    const { data, error } = await supabase
+        .from("meals")
+        .select("*")
+        .ilike("name", `%${partialName}%`)
+        .order("name", { ascending: false });
+    if (error) throw error;
+    return data as Meal[];
+}
+
 export async function createMeal(payload: Partial<Meal>): Promise<Meal> {
     const { data, error } = await supabase.from("meals").insert([payload]).select().single();
     if (error) throw error;

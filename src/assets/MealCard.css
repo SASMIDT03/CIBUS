@@ -1,0 +1,46 @@
+.mealCard {
+    background-color: var(--color-secondary);
+    width: auto;
+    max-width: 300px;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 2%;
+    height: 50px;
+    padding: 3%;
+}
+
+.mainSide {
+    border-radius: 12px;
+    width: 80%;
+    overflow: hidden;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainSide:hover {
+    cursor: pointer;
+    max-height: 110%;
+    box-shadow: 4px 4px var(--color-black);
+}
+
+.secondarySide {
+    width: 20%;
+}
+
+.mealCard img {
+    width: 50%;
+}
+
+.mealCard img:hover {
+    cursor: pointer;
+
+
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.1);
+}

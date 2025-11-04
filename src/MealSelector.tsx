@@ -1,0 +1,128 @@
+import "./assets/MealSelector.css"
+import { createMeal, deleteMeal, fetchMeals, fetchMealByName } from './api/meals.ts';
+import { Meal } from './interfaces/Meal.ts';
+import { useEffect, useState } from 'react';
+import { MealComponent } from './MealCard.tsx';
+import {MealNotesDialogBox} from "./MealNotesDialogBox.tsx";
+import {MealEditor} from "./MealEditor.tsx";
+
+type MealPopupProps = {
+    isOpen: boolean;
+    onClose: () => void;
+    onAddMeal: (meal: Meal, date: string, notes: string) => void;
+    date: string;
+};
+
+export function MealSelector({ isOpen, onClose, onAddMeal, date }: MealPopupProps) {
+
+    const [retrievedMeals, setRetrievedMeals ] = useState<Meal[]>([]);
+    const [openMealNotesDialogBox, setOpenMealNotesDialogBox] = useState(false);
+    const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
+
+    const [openMealEditor, setOpenMealEditor] = useState(false);
+
+    async function getMeals() {
+        try {
+            const fetchedMeals: Meal[] = await fetchMeals()
+
+            console.log("fetchedMeals", fetchedMeals)
+            setRetrievedMeals(fetchedMeals);
+            retrievedMeals.sort();
+        }
+        catch (error: any) {
+            console.error("Error while fetching meals: ", error);
+        }
+    }
+
+    async function getSearchedMeals(partialName: string) {
+        try {
+            const fetchedMeals: Meal[] = await fetchMealByName(partialName);
+
+            setRetrievedMeals(fetchedMeals);
+        }
+        catch (error: any) {
+            console.error("Error while fetching meals by partial name: ", error);
+        }
+    }
+
+    useEffect(() => {
+        if (!isOpen) return;
+        getMeals().then();
+    }, [isOpen]);
+
+    if (!isOpen) return null;
+
+    function tellAppToAddMeal(notes: string) {
+        onAddMeal(selectedMeal!, date, notes);
+    }
+
+    function handleOpenMealNotesDialogForMeal(meal: Meal) {
+        setSelectedMeal(meal);
+        setOpenMealNotesDialogBox(true);
+    }
+
+    function saveMeal(meal: Partial<Meal>) {
+        createMeal(meal).then(getMeals);
+        setOpenMealEditor(false);
+    }
+
+    function deleteMealById(mealId: string) {
+        deleteMeal(mealId).then(getMeals);
+    }
+
+    function editMeal(meal: Meal) {
+        setSelectedMeal(meal)
+        setOpenMealEditor(true)
+    }
+
+
+    return (
+        <div className="popup-overlay">
+            <div className="popup-content">
+                <div className="header">
+
+                </div>
+                <div className="body">
+                    <div className={"navigation"}>
+                        <input
+                            type={"text"}
+                            placeholder={"Søg.."}
+                            onChange={(e) => getSearchedMeals(e.target.value)}
+                        />
+                    </div>
+                    <div className={"main"}>
+                        {retrievedMeals.map((meal) => (
+                            <MealComponent
+                                key={meal.id}
+                                meal={meal}
+                                onSelect={() => handleOpenMealNotesDialogForMeal(meal)}
+                                onDeleteMeal={deleteMealById}
+                                onEditMeal={editMeal}
+                            />
+                        ))}
+                    </div>
+                </div>
+                <div className="footer">
+                    <button onClick={() => {
+                        setOpenMealEditor(true);
+                        setSelectedMeal(null)
+                    }
+                    }>Ny ret</button>
+                    <button onClick={onClose}>Close</button>
+                </div>
+
+                <MealNotesDialogBox
+                    isOpen={openMealNotesDialogBox}
+                    onClose={() => setOpenMealNotesDialogBox(false)}
+                    onAddMeal={tellAppToAddMeal}
+                />
+                <MealEditor
+                    isOpen={openMealEditor}
+                    onClose={() => setOpenMealEditor(false)}
+                    onSaveMeal={saveMeal}
+                    currentMeal={selectedMeal}
+                />
+            </div>
+        </div>
+    );
+}

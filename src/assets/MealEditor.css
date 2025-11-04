@@ -1,0 +1,13 @@
+.popup-mealEditor {
+    background: var(--color-primary);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 6px 6px var(--color-black);
+    max-width: 25vw;
+    height: 40vh;
+    width: 100%;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+}
