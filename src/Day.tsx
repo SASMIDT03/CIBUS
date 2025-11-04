@@ -33,7 +33,12 @@ export function Day({ dayOfWeek, date, plannedMeal, onOpenMealSelector, onDelete
                 <div className="hline"></div>
                 {plannedMeal ? (
                     <div className="dinner">
-                        <p><strong>{plannedMeal.meals?.name}</strong></p>
+                        <p
+                            className={"plannedMealTitle"}
+                            onClick={() => console.log("Meal was pressed: ", plannedMeal.meals?.name)}
+                        >
+                            <strong>{plannedMeal.meals?.name}</strong>
+                        </p>
                         {plannedMeal.notes && <p><strong>Noter:</strong> {plannedMeal.notes}</p>}
                         <div className="mealFooter">
                             <img onClick={onDeleteMeal} className="trashIcon" src={TrashIcon} />

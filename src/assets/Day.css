@@ -24,6 +24,11 @@
     width: 100%;
 }
 
+.plannedMealTitle:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
 .day header {
     width: 100%;
     display: flex;
