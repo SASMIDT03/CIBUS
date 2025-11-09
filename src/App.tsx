@@ -15,7 +15,7 @@ export default function App() {
     const [plansByDate, setPlansByDate] = useState<Record<string, MealPlan | undefined>>({});
 
     function getMonday(d: Date): Date {
-        const diffToLatestMonday = (d.getDay() + 6) % 7;
+        const diffToLatestMonday = (d.getDay() + 5) % 7;
         return new Date(d.getFullYear(), d.getMonth(), d.getDate() - diffToLatestMonday);
     }
 
@@ -78,6 +78,7 @@ export default function App() {
                 const date = new Date(monday);
                 date.setDate(monday.getDate() + i);
                 const key = date.toISOString().split("T")[0];
+                console.log("KEY IS : ", key);
                 const meal = await getPlanByDate(key);
                 if (meal) newPlans[key] = meal;
             }
